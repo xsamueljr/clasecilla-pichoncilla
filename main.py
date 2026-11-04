@@ -122,8 +122,12 @@ print(gente_que_me_cae_mal)
 gente_que_me_cae_mal.add("Jesús")
 print(gente_que_me_cae_mal)
 
-# TODO: {} = dict, set() para set vacío
+# ADVERTENCIA SI QUIERES CREAR UN SET VACÍO
 
+# mmm qué listo soy los sets son con llaves así que pongo llaves sin nada
+print(type({})) # DA DICT
+
+print(type(set())) # esto sí es un set
 
 
 # FUNCIONES DE ORDEN SUPERIOR
