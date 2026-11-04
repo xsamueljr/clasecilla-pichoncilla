@@ -127,3 +127,84 @@ print(gente_que_me_cae_mal)
 
 
 # FUNCIONES DE ORDEN SUPERIOR
+# PARA APLICAR UNA FUNCIÓN A UNA COLECCIÓN Y NO HACER BUCLES
+# OMG PROGRAMACIÓN FUNCIONAL SÍ OH OH OH YES DIDDY
+
+"""
+- map: Aplica una función a cada elemento y te crea una colección nueva con lo que devuelve
+- filter: Aplica una función que devuelve un booleano y te devuelve una colección con los que devuelvan verdadero
+"""
+
+ejemplos = list(range(1, 11))
+cuadrados = list(map(lambda x: x ** 2, ejemplos))
+print(cuadrados)
+
+# COSAS DE PROCESOS
+import subprocess
+import time
+
+ls_result = subprocess.run(["ls", "iuiagdfiuyg"], capture_output=True, text=True)
+print("Salida estándar: " + ls_result.stdout.upper())
+print("Error estándar: " + ls_result.stderr.upper())
+
+python_subprocess = subprocess.Popen(
+    ["uv", "run", "python"],
+    stdin=subprocess.PIPE,
+    stdout=subprocess.PIPE,
+    text=True
+)
+
+salida, error = python_subprocess.communicate(input="print('algo')")
+print(salida)
+print(error)
+
+"""
+run espera a que el proceso termine
+Popen sólo lo crea y te vuelve a pasar el control
+
+Si el programa va a terminar sin pedir nada y quieres lo que te devuelve y ya, run
+y si quieres su resultado inmediatamente
+
+Popen si tu programa y el que invocas van a convivir de alguna forma (comunicarse con communicate)
+o pueden trabajar en paralelo (tu programa hace otra cosa mientras)
+
+"""
+
+mayusculator_process = subprocess.Popen(
+    ["uv", "run", "python", "-c", "print(input().upper())"],
+    stdout=subprocess.PIPE,
+    stdin=subprocess.PIPE,
+    text=True
+)
+
+en_mayusculas, _ = mayusculator_process.communicate(input="algoritmos")
+print(en_mayusculas)
+
+# invocar, esperar y matar
+notepad_process = subprocess.Popen(["gnome-text-editor"])
+
+time.sleep(3)
+
+notepad_process.terminate()
+
+# invocar, monitorear, y mirar código de salida
+
+notepad_process = subprocess.Popen(["gnome-text-editor"])
+
+while notepad_process.poll() is None:
+    time.sleep(1)
+    print("El notepad sigue abierto")
+
+print(f"Código de salida: {notepad_process.poll()}")
+
+procesos = []
+
+procesos.append(subprocess.Popen(["gnome-text-editor"]))
+procesos.append(subprocess.Popen(["gnome-calculator"]))
+
+for proceso in procesos:
+    while proceso.poll() is None:
+        time.sleep(1)
+
+for proceso in procesos:
+    print(f"Código de salida del proceso {proceso.pid}: {proceso.poll()}")
