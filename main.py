@@ -140,6 +140,7 @@ cuadrados = list(map(lambda x: x ** 2, ejemplos))
 print(cuadrados)
 
 # COSAS DE PROCESOS
+from functools import wraps
 import subprocess
 import time
 
@@ -208,3 +209,23 @@ for proceso in procesos:
 
 for proceso in procesos:
     print(f"Código de salida del proceso {proceso.pid}: {proceso.poll()}")
+
+# DECORADORES
+# Función que le mete funcionalidad a otra
+
+def medir_tiempo(func):
+    @wraps(func)
+    def envoltura(*args, **kwargs):
+        start = time.time()
+        func(*args, **kwargs)
+        end = time.time()
+        difference = end - start
+        print(f"La función ha tardado {difference:.2f} segundos")
+    return envoltura
+
+@medir_tiempo
+def funcion_lenta():
+    time.sleep(1)
+
+
+funcion_lenta()
