@@ -153,8 +153,8 @@ import subprocess
 import time
 
 ls_result = subprocess.run(["ls", "iuiagdfiuyg"], capture_output=True, text=True)
-print("Salida estándar: " + ls_result.stdout.upper())
-print("Error estándar: " + ls_result.stderr.upper())
+print("Salida estándar: " + ls_result.stdout)
+print("Error estándar: " + ls_result.stderr)
 
 python_subprocess = subprocess.Popen(
     ["uv", "run", "python"],
