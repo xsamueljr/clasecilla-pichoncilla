@@ -68,6 +68,7 @@ gente_guay = [
     "Marta",
     "Daniel",
     "Jesús",
+    "Franmi",
     "Samuel"
 ]
 
@@ -139,8 +140,11 @@ print(type(set())) # esto sí es un set
 - filter: Aplica una función que devuelve un booleano y te devuelve una colección con los que devuelvan verdadero
 """
 
+def cuadrado(x):
+    return x ** 2
+
 ejemplos = list(range(1, 11))
-cuadrados = list(map(lambda x: x ** 2, ejemplos))
+cuadrados = list(map(cuadrado, ejemplos))
 print(cuadrados)
 
 # COSAS DE PROCESOS
